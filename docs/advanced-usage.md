@@ -249,3 +249,31 @@ steps:
 ```
 
 NOTE: As per https://github.com/actions/setup-node/issues/49 you cannot use `secrets.GITHUB_TOKEN` to access private GitHub Packages within the same organisation but in a different repository.
+
+## Automatically enable `corepack`
+
+_Requires Node >=14.x_
+
+`corepack` is a new experimental feature that automatically installs package managers as they are used. [Read more about it here](https://nodejs.org/docs/latest/api/corepack.html)
+
+```yaml
+steps:
+- uses: actions/checkout@v3
+- uses: actions/setup-node@v3
+  with:
+    node-version: '14.x'
+    corepack: enable
+```
+
+It is recommended to configure `package.json#packageManager` if you want to use it.
+
+e.g.
+```json
+{
+  "name": "example",
+  "packageManager": "pnpm@7.5.2",
+  // ...
+}
+```
+
+
